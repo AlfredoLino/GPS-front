@@ -1,0 +1,24 @@
+.reng{
+    display: flex;
+    label{
+        height: 25px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    
+    input[type="text"]{
+        display: block;
+    }
+    div{
+        width: 100%;
+        padding: 7px;
+    }
+    button, select{
+        border-radius: 0;
+    }
+    button{
+        border-radius: 3px;
+        margin: 8px;
+    }
+
+}

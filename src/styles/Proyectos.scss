@@ -1,0 +1,32 @@
+.center{
+    width: 92%;
+    margin: 0 auto;
+}
+
+.irow{
+    display: flex;
+}
+.project__display{
+    padding-left: 15px;
+    max-width: 900px;
+}
+.project__element{
+    padding: 10px;
+}
+.project__asignaturas{
+    li{
+        padding: 12px 0;
+    }
+}
+
+.pro__list{
+    max-height: 500px;
+    max-width: 250px ;
+    overflow-y: scroll;
+}
+.pro__title{
+    padding: 8px 0;
+}
+.card{
+    border-radius: 0;
+}
