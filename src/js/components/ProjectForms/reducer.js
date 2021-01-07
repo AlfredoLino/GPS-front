@@ -106,6 +106,7 @@ const reducer = (state, payload)=>{
             return isInAlumno ? {...state} :{...state, alumnos:[...state.alumnos, payload.value]}
 
         case actions.REMOVE_ALUMNO:
+            console.log(payload.value)
             const filteredAlumns = state.alumnos.filter(alu => alu.ncontrol != payload.value)
             return {...state, alumnos: filteredAlumns}
         case actions.ADD_ACTIVITY:
