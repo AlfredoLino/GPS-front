@@ -26,7 +26,6 @@ const reducer = (state, payload)=>{
             return {...state, tipoProyecto: payload.value}
 
         case actions.SET_INSTITUCION:
-            console.log(state)
             return {...state, institucion: payload.value}
 
         case actions.ADD_DEP:

@@ -3,6 +3,7 @@ import Alumno from "./Alumnos"
 import {FormContext} from "../MainProfesor"
 import {Context} from "../App"
 import {actions} from "./actions"
+import validator from "../../validations/datos_generales"
 import "../../../styles/Formulario.scss"
 
 const areaCon = 
@@ -47,14 +48,7 @@ const InfoGeneral = ()=>{
     const {usuario} = useContext(Context)
     const [listaDeps, setListaDeps] = useState([]);
     const [selectedDep, setSelectedDep] = useState("-1");
-    const [stateInputs, setStateInputs] = useState(
-        {
-            inst: false,
-            titulo: false,
-            colabs: false,
-            cliente: false
-        }
-    )
+    const [invalidData, setInvalidData] = useState(false)
     const requestPlanes = async()=>{
         try { 
             const req = await fetch('http://localhost:3001/reticulas')
@@ -80,15 +74,7 @@ const InfoGeneral = ()=>{
     }, []);
 
     const institucionHandler = (eve) =>{
-        if(eve.target.value.match(regex) || eve.target.value[eve.target.value.length-1] == "/"){
-            setStateInputs(prev => {
-                return {...prev, inst:false} 
-            })
-        }else{
-            setStateInputs(prev => {
-                return {...prev, inst:true} 
-            })
-        }
+        
         contextForm.dispatch(
             {
                 action: actions.SET_INSTITUCION,
@@ -142,9 +128,8 @@ const InfoGeneral = ()=>{
 
     return <>
         <h2>Informacion General</h2>
-        {!stateInputs.inst &&
-            <div class="alert alert-warning" role="alert">
-            ---Campo instituciones--- Caracteres especiales no admitidos excepto "/" o último digito no puede ser "/"
+        {invalidData && <div class="alert alert-danger" role="alert">
+                A simple danger alert—check it out!
             </div>
         }
         <div className="reng">
@@ -235,8 +220,8 @@ const InfoGeneral = ()=>{
             </div>
             <div>
                 <label> Periodo: </label>
-                <input type="date" min={new Date().toISOString().split("T")[0]} onChange = {onHandlerInicio} style={{ marginLeft:"25px", padding: "5px 0" }}/>
-                <input type="date" min={new Date().toISOString().split("T")[0]} onChange = {onHandlerFin} style={{ marginLeft:"25px", padding: "5px 0" }}/>
+                <input value ={contextForm.state.periodo.inicio ? contextForm.state.periodo.inicio: '' } type="date" min={new Date().toISOString().split("T")[0]} onChange = {onHandlerInicio} style={{ marginLeft:"25px", padding: "5px 0" }}/>
+                <input value ={contextForm.state.periodo.fin ? contextForm.state.periodo.fin: '' } type="date" min={new Date().toISOString().split("T")[0]} onChange = {onHandlerFin} style={{ marginLeft:"25px", padding: "5px 0" }}/>
             </div>
 
         </div>           
@@ -265,8 +250,41 @@ const InfoGeneral = ()=>{
             </div>
         </div>
         <button onClick={(eve)=>{
-            contextForm.dispatch({ action: actions.NEXT_PAGE, mensaje: "Hola payload" })
-            console.log(contextForm.state.departamentos)
+            const {
+                institucion,
+                profResp,
+                departamentos,
+                alumnos,
+                tituloProInt,
+                colab,
+                cliente,
+                materiaEje,
+                periodo,
+                areaConoc,
+                tipoEjec,
+            } = contextForm.state
+            const result = validator.validate(
+            {
+                institucion,
+                profResp,
+                departamentos,
+                alumnos,
+                tituloProInt,
+                colab,
+                cliente,
+                materiaEje,
+                periodo,
+                areaConoc,
+                tipoEjec,
+            })
+            if(result.error){
+                setInvalidData(true)
+                setInterval(()=>{
+                    setInvalidData(false)
+                }, 2000)
+            }else{
+                contextForm.dispatch({ action: actions.NEXT_PAGE, mensaje: "Hola payload" })
+            }
         }} className = "btn btn-primary">Siguiente</button>       
     
     </>
