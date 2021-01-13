@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {FormContext} from "../MainProfesor"
 import {actions} from "./actions"
 import ListaCompetencias from "./ListaCompetencias"
+import validator from "../../validations/competencias"
 
 const Competencias = ()=>{
     const {state, dispatch} = useContext(FormContext);
@@ -44,7 +45,16 @@ const Competencias = ()=>{
             ()=>{ dispatch({ action: actions.PREV_PAGE }) }
         }>Regresar</button>
         <button style={{marginTop: "15px"}} className={"btn btn-primary"} onClick = {
-            ()=>{ dispatch({ action: actions.NEXT_PAGE }) }
+            ()=>{
+                const {asignaturas} = state
+                const result = validator.validate({ asignaturas })
+                if(result.error){
+                    
+                    console.log('No pasarás ', result)
+                }else{ 
+                    dispatch({ action: actions.NEXT_PAGE }) 
+                }
+            }
         }>Siguiente</button>
     </>
 }

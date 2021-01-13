@@ -4,55 +4,40 @@ import {join} from "path"
 import {shell} from "electron"
 
 const ProjectDisplay = (props) => {
-    const {asignaturas, title, institucion, departamentos, coordinador, colab
+    const {asignaturas, tituloProInt, institucion, departamentos, coordinador, colab
     , areaConoc, tipoEjec, tipoProyecto, materiaEje
     ,limityRest, cronograma} = props
-    
-    const [downloadState, setDownloadState] = useState(false);
-    const [dStateMsg, setDStateMsg] = useState("")
 
-    const downloadHandler = async (act_name)=>{
-        try{
-            const req = await fetch("http://localhost:3001/download", {
-                method: "POST",
+    const req_tohtml = async () =>{
+        try {
+            const req = await fetch('http://localhost:3001/format-download', {
+                method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    titulo: title,
-                    actividad: act_name
+                    asignaturas, tituloProInt, institucion, coordinador, colab
+                    , areaConoc, tipoEjec, cronograma
                 })
             })
-
             const res = await req.json()
-            if(res.ok){/*
-                const file = new Buffer.from(res.buffer)
-                console.log(Buffer.from(file.buffer))
-                fs.writeFileSync(join(__dirname, "actividadCronograma.pdf"), Buffer.from(file.buffer))
-                setDStateMsg("Descarga exitosa")
-                setDownloadState(true)*/
-            }else{
-                setDStateMsg("Descarga fallida")
-                setDownloadState(true)
-                setInterval(() => {
-                    setDownloadState(false)
-                }, 2000);
-            }
-        }catch(err){
-            console.log(err)
-            setDStateMsg("Descarga fallida")
-            setDownloadState(false)
+            console.log(res)
+        } catch (error) {
+            console.log(error)
         }
     }
     return (
         <div style={{width:"75%", margin:"20px auto"}}>
-            <h3>Titulo: {title}</h3>
+            <button onClick = {() =>{ req_tohtml() }} style={{margin: "15px 0 0 10px"}} className='btn'>Descargar informe</button>
+            <h3>Titulo: {tituloProInt}</h3>
             <p> 
                 <span><b>Institucion: </b>{institucion}</span> 
-                <span><b>Coordinador: </b>{coordinador}</span> 
-                <span><b>Colaborador(es): </b>{colab}</span>
+                 
             </p>
-            <p>Departamentos: </p>
+            <p><span><b>Coordinador: </b>{coordinador}</span></p>
+            <p><span><b>Colaborador(es): </b>{colab}</span></p>
+
+            <p style={{marginTop: "15px"}}>Departamentos: </p>
             <ul>
                 {departamentos.map(({dep, plan}) => <li><b>{dep}</b>: {plan}</li>)}
             </ul>
@@ -124,7 +109,10 @@ const ProjectDisplay = (props) => {
                         <td>{atvt.nombreActividad}</td>
                         <td>{atvt.responsables.map(res => "/"+res)}</td>
                         <td>{atvt.entrega.split("T")[0]}</td>
-                        <td>{(atvt.entregado) ? ( new Date(atvt.entrega) > new Date(atvt.entregado.fecha) ? <><b style = {{color: "green"}} >A tiempo</b> <button onClick={()=>{shell.openExternal('http://localhost:3001/download')}}>Descargar</button> </> : <><b style = {{color: "red"}} >Tarde</b><br/><button>Descargar</button></> ) 
+                        <td>{(atvt.entregado) ? ( new Date(atvt.entrega) > new Date(atvt.entregado.fecha) ? <><b style = {{color: "green"}} >A tiempo</b> 
+                        <button onClick={()=>{shell.openExternal(`http://localhost:3001/download?proyecto=${tituloProInt}&actividad=${atvt.nombreActividad}`)}}>Descargar</button> </> 
+                        : 
+                        <><b style = {{color: "red"}} >Tarde</b><br/><button>Descargar</button></> ) 
                         : "Pendiente..."}</td>
                     </tr>)}
                 </tbody>

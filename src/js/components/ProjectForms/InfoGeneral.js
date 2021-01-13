@@ -129,14 +129,13 @@ const InfoGeneral = ()=>{
     return <>
         <h2>Informacion General</h2>
         {invalidData && <div class="alert alert-danger" role="alert">
-                A simple danger alert—check it out!
+               Todos los campos deben ser llenados de forma satisfactoria.
             </div>
         }
         <div className="reng">
             <div>
                 <label>Institución (dividir con "/" en caso de mas de una): </label>
                 <input minLength="6" value = {contextForm.state.institucion} onChange = {institucionHandler} type="text" className="form-control" placeholder="Institucion"  />
-                
             </div>
             <div>
                 <label>Coordinador del proyecto integrador </label>
@@ -177,7 +176,6 @@ const InfoGeneral = ()=>{
                         </button>
                     </li>)
                 }
-                        
                 </ul>
             </div>
         </div>

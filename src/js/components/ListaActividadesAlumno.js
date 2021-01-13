@@ -8,7 +8,7 @@ const ListaActividadesAlumno = () => {
     const inputFile = useRef(null)
 
     const [actividad, setActividad] = useState(undefined)
-    const [archivo, setArchivo] = useState(undefined)
+    const [archivo, setArchivo] = useState([])
 
     const [error, seterror] = useState(undefined);
 
@@ -24,6 +24,8 @@ const ListaActividadesAlumno = () => {
     }
 
     const submitActivity = async (nombreActividad)=>{
+        const {f:pathfile} = archivo.find(file => file.a == nombreActividad) 
+        
         try {
             const req = await fetch('http://localhost:3001/activityToProject', 
                 {
@@ -33,13 +35,14 @@ const ListaActividadesAlumno = () => {
                     },
                     body: JSON.stringify({
                         fecha: new Date(),
-                        filePath: archivo,
+                        filePath: pathfile,
                         titulo: nombre,
                         actividad: nombreActividad
                     })
                 }
             )
             const res = await req.json()
+            console.log(res)
             if(res.ok){
                 handlerRequest()
             }else{
@@ -70,8 +73,12 @@ const ListaActividadesAlumno = () => {
                             <p>Estado: {new Date(act.entrega) > new Date(act.entregado.fecha) ?
                             <b style={{color: "green"}}>A tiempo</b> : <b style={{color: "red"}}>Atrasado</b>}</p>
                         </> : <>
-                            {archivo && <p onClick={()=>{submitActivity(act.nombreActividad)}} className = "project__entrega">Entregar</p>} 
-                            <input ref={inputFile} onChange={(e) => { setArchivo(inputFile.current.files[0].path)}} type="file" accept=".xlsx,.xls,.doc, .docx,.pdf" />
+                            {(archivo.length > 0 && archivo.find(files => files.a == act.nombreActividad) ) && <p onClick={()=>{submitActivity(act.nombreActividad)}} className = "project__entrega">Entregar</p>} 
+                            <input onChange={(e) => { 
+                                const [file] = e.target.files
+                                setArchivo(prev => [...prev, {f: file.path, a: act.nombreActividad }])
+                                console.log(file.path, archivo)
+                            }} type="file" accept=".xlsx,.xls,.doc, .docx,.pdf" />
                         </>
                         }
                     </div>)}

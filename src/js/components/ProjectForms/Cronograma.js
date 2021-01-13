@@ -1,13 +1,17 @@
 import React,{useContext, useState} from 'react';
+import validatos from "../../validations/cronograma"
 import {FormContext} from "../MainProfesor"
 import Actividad from "./Actividad"
 import {actions} from "./actions"
+import validator from '../../validations/cronograma';
 
 const Cronograma = () =>{
   const {state, dispatch} = useContext(FormContext)
   const [last] = state.cronograma.slice(-1)
   const [activityCount, setActivityCount] = useState(last ? last.nactividad+1 : 0)
   const [selectedProduct, setSelectedProduct] = useState("-1");
+  const [validData, setValidData] = useState(false)
+
   const addActivity = () => {
     setActivityCount(prev => prev+1)
     dispatch({action: actions.ADD_ACTIVITY, value: activityCount})
@@ -121,7 +125,53 @@ const Cronograma = () =>{
       ()=>{ dispatch({action: actions.PREV_PAGE}) }
     } >Regresar</button>
     </div>
-    <button onClick={handlerSubmitProject} className="btn btn-warning">Crear proyecto</button>
+
+    <button onClick = {()=>{
+      const {
+        cronograma,
+        impactoProyecto,
+        producto
+      } = state
+      const result = validator.validate({
+        cronograma,
+        impactoProyecto,
+        producto
+      })
+      console.log(result)
+      if(!result.error){
+        console.log("DATOS VALIDOS")
+        setValidData(true)
+      }else{
+        setValidData(false)
+      }
+
+    }} type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      CREAR PROYECTO
+    </button>
+
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {validData && <h4>Datos Validos...</h4>}
+            {validData ?  "Por favor, confirme que está seguro de los datos proporcionados anteriormente.": "Por favor verifique que cumpla todos los campos antes de continuar."}
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            {validData &&
+            <button onClick={handlerSubmitProject} className="btn btn-warning">confirmar y crear proyecto</button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+        
   </>
 }
 
