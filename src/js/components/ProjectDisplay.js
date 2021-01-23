@@ -8,27 +8,10 @@ const ProjectDisplay = (props) => {
     , areaConoc, tipoEjec, tipoProyecto, materiaEje
     ,limityRest, cronograma} = props
 
-    const req_tohtml = async () =>{
-        try {
-            const req = await fetch('http://localhost:3001/format-download', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    asignaturas, tituloProInt, institucion, coordinador, colab
-                    , areaConoc, tipoEjec, cronograma
-                })
-            })
-            const res = await req.json()
-            console.log(res)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    
     return (
         <div style={{width:"75%", margin:"20px auto"}}>
-            <button onClick = {() =>{ req_tohtml() }} style={{margin: "15px 0 0 10px"}} className='btn'>Descargar informe</button>
+            <button onClick = {() =>{ shell.openExternal(`http://localhost:3001/format-download?titulo=${tituloProInt}`) }} style={{margin: "15px 0 0 10px"}} className='btn'>Descargar informe</button>
             <h3>Titulo: {tituloProInt}</h3>
             <p> 
                 <span><b>Institucion: </b>{institucion}</span> 

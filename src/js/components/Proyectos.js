@@ -46,7 +46,7 @@ const Proyectos = () => {
                     <div className="project__display">
                         { projectToView ? 
                         <ProjectDisplay 
-                            title = {projectToView.tituloProInt}
+                            tituloProInt = {projectToView.tituloProInt}
                             institucion = {projectToView.institucion}
                             coordinador = {projectToView.profResp}
                             departamentos = {projectToView.departamentos} 
