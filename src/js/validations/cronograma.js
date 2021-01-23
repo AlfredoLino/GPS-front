@@ -6,9 +6,9 @@ const validator = Joi.object({
         nombreActividad: Joi.string().required(),
         nactividad: Joi.number().required(),
         entrega: Joi.string().required()
-    })),
-    impactoProyecto: Joi.string().min(1),
-    producto: Joi.array().items(Joi.string())
+    })).unique('nombreActividad').required().min(1),
+    impactoProyecto: Joi.string().min(1).required(),
+    productoEntrega: Joi.array().items(Joi.string()).required().min(1)
 })
 
 export default validator

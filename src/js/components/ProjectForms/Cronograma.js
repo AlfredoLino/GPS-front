@@ -130,12 +130,12 @@ const Cronograma = () =>{
       const {
         cronograma,
         impactoProyecto,
-        producto
+        productoEntrega
       } = state
       const result = validator.validate({
         cronograma,
         impactoProyecto,
-        producto
+        productoEntrega
       })
       console.log(result)
       if(!result.error){
