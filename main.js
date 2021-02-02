@@ -9,7 +9,7 @@ const createWindow = ()=>{
         height: 680,
         webPreferences:{
             nodeIntegration: true,
-            //contextIsolation: false,
+            contextIsolation: false,
             //worldSafeExecuteJavaScript: false,
             preload: path.join(__dirname, 'preload.js')
         },
@@ -30,7 +30,7 @@ if(isDev){
 }
 
 app.whenReady().then(createWindow)
-
+/*
 ipcMain.on('notify', (_, message) => {
     new Notification({title: 'Notification', body: message}).show();
 })
@@ -49,5 +49,5 @@ ipcMain.on('dia', (event, arg)=>{
         }catch(err){
             event.returnValue("hola")
         }
-    */
-})
+    
+})*/

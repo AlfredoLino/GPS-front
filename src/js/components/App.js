@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Login from './Login'
+import ProjectCreated from './ProjectCreated'
 import Proyectos from "./Proyectos"
 import MainProfesor from "./MainProfesor"
 import MainAlumno from "./MainAlumno"
@@ -25,6 +26,9 @@ const App = ()=>{
         <Context.Provider value={initialState}>
             <BrowserRouter>
                 <Switch>
+                    <Route exact path = '/creado' >
+                        
+                    </Route>
                     <Route exact path={`/actividadesProyectoAlumno/:nombre`} >
                         <ListaActividadesAlumno />
                     </Route>
@@ -41,7 +45,7 @@ const App = ()=>{
                         <Proyectos/>
                     </Route>
                     <Route path = "/">
-                        <Login />
+                        <ProjectCreated />
                     </Route>
                 </Switch>
             </BrowserRouter>

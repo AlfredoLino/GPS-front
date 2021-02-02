@@ -1,9 +1,9 @@
 import React,{useContext, useState} from 'react';
-import validatos from "../../validations/cronograma"
 import {FormContext} from "../MainProfesor"
 import Actividad from "./Actividad"
 import {actions} from "./actions"
 import validator from '../../validations/cronograma';
+import {Redirect} from 'react-router-dom'
 
 const Cronograma = () =>{
   const {state, dispatch} = useContext(FormContext)
@@ -11,6 +11,8 @@ const Cronograma = () =>{
   const [activityCount, setActivityCount] = useState(last ? last.nactividad+1 : 0)
   const [selectedProduct, setSelectedProduct] = useState("-1");
   const [validData, setValidData] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [created, setCreated] = useState(false);
 
   const addActivity = () => {
     setActivityCount(prev => prev+1)
@@ -52,6 +54,7 @@ const Cronograma = () =>{
   }
   
   const handlerSubmitProject = async () =>{
+    setLoading(true)
     try {
       const req = await fetch("http://localhost:3001/createProyecto", {
         method: "POST",
@@ -65,13 +68,19 @@ const Cronograma = () =>{
         )
       })
       const res = await req.json()
-      console.log(res)
+      if (res) {
+        
+        setCreated(true)
+
+      }
     } catch (error) {
       console.log(error)
     }
+    
   }
 
   return <>
+    {created && <Redirect to = '/creado' />}
     <div style={{padding: "15px 10px 0 0"}} className="accordion accordion-flush" id="accordionFlushExample">
       <div className="accordion-item">
         <h2 className="accordion-header" id="flush-headingOne">
@@ -126,7 +135,7 @@ const Cronograma = () =>{
     } >Regresar</button>
     </div>
 
-    <button onClick = {()=>{
+    <button  onClick = {()=>{
       const {
         cronograma,
         impactoProyecto,
@@ -165,7 +174,7 @@ const Cronograma = () =>{
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             {validData &&
-            <button onClick={handlerSubmitProject} className="btn btn-warning">confirmar y crear proyecto</button>
+            <button data-bs-dismiss="modal" disabled = {loading} onClick={handlerSubmitProject} className="btn btn-warning">confirmar y crear proyecto</button>
             }
           </div>
         </div>

@@ -1,4 +1,4 @@
-const {ipcRenderer, contextBridge} = require('electron')
+/*const {ipcRenderer, contextBridge} = require('electron')
 
 contextBridge.exposeInMainWorld('e_notification', {
     sendNotification(message){
@@ -7,4 +7,4 @@ contextBridge.exposeInMainWorld('e_notification', {
     showDialog(){
         ipcRenderer.send('dia')
     }
-})
+})*/

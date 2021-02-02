@@ -42,6 +42,7 @@ export default ()=>{
         }
     }
     return <>
+    
         {tokenContext.token && <Redirect to = {`/${type}/main/`} />}
         <div className="container">
             <div className = "row">
