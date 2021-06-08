@@ -32,7 +32,7 @@ const Competencias = ()=>{
         {state.departamentos.length > 0 &&
         <div className="input-group mb-3">
             <button onClick={addCompetencia} className="btn btn-outline-secondary" style={{...compStyles.buttonAdd}} type="button">Añadir</button>
-            <select value={selectedCompt} onChange={handlerSelectedCompt} style={{...compStyles.selectMat}} class="form-select">
+            <select value={selectedCompt} onChange={handlerSelectedCompt} style={{...compStyles.selectMat}} className="form-select">
                 <option defaultChecked value = "-1">--seleccionar competencia--</option>
                 {state.departamentos.map(dep => dep.materias.map(materia => <option key={materia._id} value={`${materia.nombre}/${materia.compDes}/${materia.compPrev}/${materia.semestre}`}>{materia.nombre}</option> ) )}
             </select>

@@ -128,7 +128,7 @@ const InfoGeneral = ()=>{
 
     return <>
         <h2>Informacion General</h2>
-        {invalidData && <div class="alert alert-danger" role="alert">
+        {invalidData && <div className="alert alert-danger" role="alert">
                Todos los campos deben ser llenados de forma satisfactoria.
             </div>
         }
@@ -206,7 +206,7 @@ const InfoGeneral = ()=>{
         <div className="reng">
             <div>
                 <label>Materia eje</label>
-                <select onChange={onHandlerMateriaEje} style={{marginLeft:"25px", padding:"5px 0"}} class="form-select" aria-label="Default select example">
+                <select onChange={onHandlerMateriaEje} style={{marginLeft:"25px", padding:"5px 0"}} className="form-select" aria-label="Default select example">
                     <option defaultChecked value="-1">Seleccione materia eje</option>
                     {
                         contextForm.state.departamentos.length > 0 &&
@@ -219,7 +219,7 @@ const InfoGeneral = ()=>{
             <div>
                 <label> Periodo: </label>
                 <input value ={contextForm.state.periodo.inicio ? contextForm.state.periodo.inicio: '' } type="date" min={new Date().toISOString().split("T")[0]} onChange = {onHandlerInicio} style={{ marginLeft:"25px", padding: "5px 0" }}/>
-                <input value ={contextForm.state.periodo.fin ? contextForm.state.periodo.fin: '' } type="date" min={new Date().toISOString().split("T")[0]} onChange = {onHandlerFin} style={{ marginLeft:"25px", padding: "5px 0" }}/>
+                <input value ={contextForm.state.periodo.fin ? contextForm.state.periodo.fin: '' } type="date" min={ contextForm.state.periodo.inicio ? contextForm.state.periodo.inicio : new Date().toISOString().split("T")[0]} defaultValue = {contextForm.state.periodo.inicio && contextForm.state.periodo.inicio} onChange = {onHandlerFin} style={{ marginLeft:"25px", padding: "5px 0" }}/>
             </div>
 
         </div>           
@@ -227,7 +227,7 @@ const InfoGeneral = ()=>{
             <div className="col-sm-6">
                 <div className="input-group mb-3">
                             <label className="input-group-text" style={{borderTopRightRadius:"0", borderBottomRightRadius:"0"}} >Areas de conocimiento: </label>
-                            <select value = {contextForm.state.areaConoc} onChange={onHandlerAreaConoc} style={{width: (areaCon.indexOf(contextForm.state.areaConoc) == "-1" && contextForm.state.areaConoc != "" ) ? "120px":"325px", borderRadius:"0"}} class="form-select" id="inputGroupSelect01">
+                            <select value = {contextForm.state.areaConoc} onChange={onHandlerAreaConoc} style={{width: (areaCon.indexOf(contextForm.state.areaConoc) == "-1" && contextForm.state.areaConoc != "" ) ? "120px":"325px", borderRadius:"0"}} className="form-select" id="inputGroupSelect01">
                                 <option defaultChecked value="-1">--Areas--</option>
                                 {areaCon.map(area => <option key={area} value={area}>{area}</option> )}
                                 <option value="Otras">Otras</option>
@@ -238,7 +238,7 @@ const InfoGeneral = ()=>{
             <div className="col-sm-6">
                 <div className="input-group mb-3">
                         <label className="input-group-text" style={{borderTopRightRadius:"0", borderBottomRightRadius:"0"}} >Tipo de ejecución</label>
-                        <select value = {contextForm.state.tipoEjec} onChange={onHandlerTipoEjec} style={{width: (tipoEjec.indexOf(contextForm.state.tipoEjec) == "-1" && contextForm.state.tipoEjec != "" ) ? "120px":"325px", borderRadius:"0"}} class="form-select" id="inputGroupSelect01">
+                        <select value = {contextForm.state.tipoEjec} onChange={onHandlerTipoEjec} style={{width: (tipoEjec.indexOf(contextForm.state.tipoEjec) == "-1" && contextForm.state.tipoEjec != "" ) ? "120px":"325px", borderRadius:"0"}} className="form-select" id="inputGroupSelect01">
                             <option defaultChecked value = "-1">--Ejecuciones--</option>
                             {tipoEjec.map(tipo => <option key={tipo} value={tipo}>{tipo}</option> )}
                             <option value="Otras">Otras</option>

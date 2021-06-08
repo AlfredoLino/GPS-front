@@ -38,7 +38,7 @@ const Actividad = ({nactividad}) =>{
     
     return <>
         <h3>Actividad {nactividad+1}</h3>
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
           <input onChange={handlerNombreActividad} className="form-control" placeholder="Nombre de actividadd"></input>
         </div>
         <div className="input-group mb-3">
@@ -57,9 +57,9 @@ const Actividad = ({nactividad}) =>{
         state.cronograma.map( activity => 
           (activity.nactividad == nactividad) &&
             activity.responsables.map(name => 
-              <div class="input-group mb-3">
-                <input value={name} type="text" disabled class="form-control" />
-                <button onClick={() =>{ dispatch({ action: actions.REMOVE_ALUMN_ACTIVITY, nactividad, value: name }) }} class="btn btn-danger" type="button">Quitar</button>
+              <div className="input-group mb-3">
+                <input value={name} type="text" disabled className="form-control" />
+                <button onClick={() =>{ dispatch({ action: actions.REMOVE_ALUMN_ACTIVITY, nactividad, value: name }) }} className="btn btn-danger" type="button">Quitar</button>
               </div> 
             )
                   

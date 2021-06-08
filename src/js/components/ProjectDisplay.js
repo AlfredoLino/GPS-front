@@ -22,12 +22,12 @@ const ProjectDisplay = (props) => {
 
             <p style={{marginTop: "15px"}}>Departamentos: </p>
             <ul>
-                {departamentos.map(({dep, plan}) => <li><b>{dep}</b>: {plan}</li>)}
+                {departamentos.map(({dep, plan}) => <li key = {plan}><b>{dep}</b>: {plan}</li>)}
             </ul>
             <p><b>Asignaturas: </b></p>
             <ul className="project__asignaturas">
                 {asignaturas.map(asign =>
-                    <li style={{margin: "7px"}} >
+                    <li key = {asign.nombre} style={{margin: "7px"}} >
                         <p>
                             <span>
                                 <b>Nombre: </b>
@@ -77,7 +77,7 @@ const ProjectDisplay = (props) => {
             <p><span><b>Tipo de proyecto: </b>{tipoProyecto}</span></p>
 
             <h4>Actividades: </h4>
-            <table class="table">
+            <table className="table">
                 <thead>
                     <tr>
                         <th scope="col">Actividad</th>

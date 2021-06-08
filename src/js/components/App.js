@@ -27,7 +27,7 @@ const App = ()=>{
             <BrowserRouter>
                 <Switch>
                     <Route exact path = '/creado' >
-                        
+                        <ProjectCreated />
                     </Route>
                     <Route exact path={`/actividadesProyectoAlumno/:nombre`} >
                         <ListaActividadesAlumno />
@@ -45,7 +45,7 @@ const App = ()=>{
                         <Proyectos/>
                     </Route>
                     <Route path = "/">
-                        <ProjectCreated />
+                        <Login />
                     </Route>
                 </Switch>
             </BrowserRouter>

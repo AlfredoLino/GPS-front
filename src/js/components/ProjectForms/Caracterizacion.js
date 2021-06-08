@@ -30,7 +30,7 @@ const Caracterizacion = ()=>{
 
     return <>
         <h1>Caracterizacion del proyecto</h1>
-        {invalidData && <div class="alert alert-danger" role="alert">
+        {invalidData && <div className="alert alert-danger" role="alert">
                Todos los campos deben ser llenados de forma satisfactoria.
             </div>
         }

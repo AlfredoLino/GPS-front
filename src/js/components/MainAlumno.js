@@ -27,7 +27,7 @@ const MainAlumno = () => {
             <div className="display__home">
                 <h1>Proyectos de {`${usuario.nombre} ${usuario.apellidos}`}</h1>
                 <ul>
-                    {proyectos && proyectos.map(pro => <div className="project__element">
+                    {proyectos && proyectos.map(pro => <div key = {pro.tituloProInt} className="project__element">
                         <h3> <Link className="project__link" to = {`/actividadesProyectoAlumno/${pro.tituloProInt}`}>{pro.tituloProInt}</Link> </h3>
                         <p>coordinador del proyecto: <b>{pro.profResp}</b></p>
                         <p>cliente: <b>{pro.cliente}</b></p>

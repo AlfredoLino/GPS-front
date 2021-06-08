@@ -63,7 +63,7 @@ const ListaActividadesAlumno = () => {
             <div className="display__home">
                 <h1>{nombre}</h1>
                 <ul>
-                    {actividad && actividad.cronograma.map(act => <div className="project__element" >
+                    {actividad && actividad.cronograma.map(act => <div key = {act.nombreActividad} className="project__element" >
 
                         <h4>{act.nombreActividad}</h4>
                         <p><span><b>fecha limite de entrega: </b></span> {new Date(act.entrega).toISOString().split("T")[0]} </p>

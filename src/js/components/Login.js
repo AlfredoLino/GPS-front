@@ -49,8 +49,16 @@ export default ()=>{
                 <div className="fields__login col-sm-4">
                     <h2>Login</h2>
                     <div className="form-group">
-                    <input onChange = {e => {setEmail(e.target.value)}} type="email" placeholder = "Correo Electronico" className="form-control" aria-describedby="emailHelp"/>
-                    <input onChange = {e => {setPass(e.target.value)}} type="password" placeholder = "Password" className="form-control" aria-describedby="emailHelp"/>
+                    <input onChange = 
+                    {e => {setEmail(e.target.value)}} type="email" 
+                    placeholder = "Correo Electronico" 
+                    className="form-control" 
+                    aria-describedby="emailHelp"/>
+                    <input onChange = 
+                    {e => {setPass(e.target.value)}} type="password" 
+                    placeholder = "Password" 
+                    className="form-control" 
+                    aria-describedby="emailHelp"/>
                     </div>
                     <RadioLog handler = {setType} type = {type} />
                     <button onClick={onLogIn} className="btn btn-primary btn-lg btn-block">Log in</button>
@@ -58,14 +66,20 @@ export default ()=>{
                     <div className="card infoLog">
                         <div  >
                             <p className="card-text">Instituto Tecnológico de Ciudad Madero</p>
-                            <p className="card-text">Av. 1o. de Mayo esq. Sor Juana Inés de la Cruz s/n Col. Los Mangos C.P.89440</p>
+                            <p className="card-text">
+                            Av. 1o. de Mayo esq. Sor Juana Inés de la Cruz s/n Col. Los Mangos C.P.89440
+                            </p>
                             <p className="card-text">Conmutador: <b>01 (833) 357-48-20</b></p>
                         </div>
                     </div>
                     
                 </div>
                 <div className="col-sm-8">
-                    <img style={{display: "block"}} src="https://www.matamoros.tecnm.mx/wp-content/uploads/2017/05/Logo-TecNM-2017-Ganador.png"/>
+                    <img style={{display: "block"}} 
+                    src=
+                    "https://www.matamoros.tecnm.mx/wp-content/uploads/2017/05/Logo-TecNM-2017-Ganador.png"
+
+                    />
                 </div>                
 
             </div>

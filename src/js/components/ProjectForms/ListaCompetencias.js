@@ -27,15 +27,15 @@ const ListaCompetencias = ({titulo, semestre, compPrev, compDes, etapaone, etapa
         borderRadius: "0"
       }
     }
-    return <div class="list-group" style={{margin: "15px 0"}} >
+    return <div className="list-group" style={{margin: "15px 0"}} >
     <button onClick={removeCompetencia} style={{borderRadius:"0"}} className="btn btn-danger" >Borrar</button>
-    <span class="list-group-item">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Asignatura: {titulo} </h5>
-        <small class="text-muted">Semestre: {semestre}</small>
+    <span className="list-group-item">
+      <div className="d-flex w-100 justify-content-between">
+        <h5 className="mb-1">Asignatura: {titulo} </h5>
+        <small className="text-muted">Semestre: {semestre}</small>
       </div>
-      <p class="mb-1"><b>Competencias previas: </b>{compPrev}</p>
-      <p class="mb-1"><b>Competencias a desarrollar: </b>{compDes}</p>
+      <p className="mb-1"><b>Competencias previas: </b>{compPrev}</p>
+      <p className="mb-1"><b>Competencias a desarrollar: </b>{compDes}</p>
       <div className="row">
         <div style={{...stylesForms.cols}} className="col-sm-4">
           <label><p>Etapa 1</p></label>
