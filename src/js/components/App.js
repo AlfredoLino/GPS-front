@@ -17,9 +17,16 @@ const App = ()=>{
     const [usuario, setUsuario] = useState(null);
     const initialState = 
     {
-        token,
+         token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkNhcmxvc0BnbWFpbC5jb20iLCJpYXQiOjE2NTE2MzY3NDl9.Z2JQ9IR6lAb6i2_BCNQn0BzV9JjwWLoSxDeGxfLv65I",
         setToken,
-        usuario,
+        usuario: {
+            dep: "ISC",
+            email: "Carlos@gmail.com",
+            nombre: "Carlos Arturo Aguilar",
+            password: "password",
+            __v: 0,
+            _id: "5fccff4af8f1cb2b90967f01"
+        },
         setUsuario
     }
     return <>

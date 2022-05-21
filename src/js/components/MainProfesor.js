@@ -1,6 +1,7 @@
-import React, {useState, useContext, useEffect, useReducer} from 'react';
+import React, { useContext, useReducer} from 'react';
 //import {Context} from './App'
 //import {Redirect, useParams} from 'react-router-dom'
+import { Context } from './App';
 import "bootstrap/dist/css/bootstrap.min.css"
 import Layout from '../layouts/Profesor'
 import InfoGeneral from './ProjectForms/InfoGeneral'
@@ -9,8 +10,6 @@ import Competencias from "./ProjectForms/Competencias"
 import Cronograma from "./ProjectForms/Cronograma"
 import reducer from "./ProjectForms/reducer"
 import "../../styles/MainProfesor.scss"
-
-import { stat } from 'fs';
 
 const FormContext = React.createContext()
 const initialFormState = 
@@ -41,6 +40,8 @@ const initialFormState =
 const MainProfesor = (props)=>{
     
     const [state, dispatch] = useReducer(reducer, initialFormState);
+    const con = useContext(Context)
+    console.log(con)
     return <>
         <Layout>
             <div className="container">

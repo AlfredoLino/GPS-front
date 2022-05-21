@@ -1,5 +1,8 @@
 body{
-    background-color: #ffffff;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/26/Edificios_en_el_Tec_de_Madero.jpg');
+    background-size: cover;
+    height: 100vh;
+
 }
 .fields__login{
     padding: 15px;
@@ -10,8 +13,9 @@ body{
     }
 }
 img{
-    max-width:100%;
+    max-width:90%;
     max-height:100%;
+    margin-top: 2rem;
 }
 
 .center__login{

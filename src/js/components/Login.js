@@ -46,15 +46,45 @@ export default ()=>{
         {tokenContext.token && <Redirect to = {`/${type}/main/`} />}
         <div className="container">
             <div className = "row">
-                <div className="fields__login col-sm-4">
-                    <h2>Login</h2>
+                <div
+                style={{
+                    height: '100vh',
+                    backgroundColor: 'white',
+                    boxShadow: '1px 7px 26px -7px rgba(0,0,0,0.75)',
+                    borderRadius: '0',
+                    position: 'relative',
+                    overflow: 'hidden'
+                }}
+                className="fields__login col-sm-4">
+                    <div
+                    style={{
+                        height: '1000px',
+                        width: '200px',
+                        backgroundColor: '#00325F',
+                        position:'absolute',
+                        transform: 'rotate(-27deg)',
+                        right: '70%'
+                    }}
+                    ></div>
+                    <h2 style={{marginBottom: '1rem'}}>Login</h2>
                     <div className="form-group">
-                    <input onChange = 
+                    <input style={
+                        {
+                            borderBottomLeftRadius:0,
+                            borderBottomRightRadius:0
+                        }
+                    } onChange = 
                     {e => {setEmail(e.target.value)}} type="email" 
                     placeholder = "Correo Electronico" 
                     className="form-control" 
                     aria-describedby="emailHelp"/>
-                    <input onChange = 
+                    <input style={
+                        {
+                            borderTopLeftRadius:0,
+                            borderTopRightRadius:0
+                        }
+                    } 
+                    onChange = 
                     {e => {setPass(e.target.value)}} type="password" 
                     placeholder = "Password" 
                     className="form-control" 
@@ -75,11 +105,12 @@ export default ()=>{
                     
                 </div>
                 <div className="col-sm-8">
-                    <img style={{display: "block"}} 
-                    src=
-                    "https://www.matamoros.tecnm.mx/wp-content/uploads/2017/05/Logo-TecNM-2017-Ganador.png"
-
-                    />
+                    <img 
+                    style={{
+                        display: 'block',
+                        margin: '2rem auto'
+                    }}
+                    src='https://www.tecnm.mx/images/tecnm_virtual/tecnm.png'/>
                 </div>                
 
             </div>
