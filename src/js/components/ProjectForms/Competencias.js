@@ -27,7 +27,7 @@ const Competencias = ()=>{
         dispatch({action: actions.ADD_COMPETENCIA, value: newValue})
     }
 
-    return <>
+    return <div className='activity' style={{marginTop: '1rem'}}>
         <h1>Competencias</h1>
         {state.departamentos.length > 0 &&
         <div className="input-group mb-3">
@@ -41,6 +41,12 @@ const Competencias = ()=>{
             {state.asignaturas.length > 0 ? state.asignaturas.map(asign => <ListaCompetencias key={asign.nombre} etapathree= {asign.etapa_three} etapatwo={asign.etapa_two} etapaone={asign.etapa_one} compDes={asign.compDes} compPrev={asign.compPrev} titulo={asign.nombre} semestre ={asign.semestre} />): <h3>Por favor, inserte una competencia</h3> }
             
         </div>
+
+        <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+        }}>
+
         <button style={{marginTop: "15px"}} className={"btn btn-primary"} onClick = {
             ()=>{ dispatch({ action: actions.PREV_PAGE }) }
         }>Regresar</button>
@@ -56,7 +62,8 @@ const Competencias = ()=>{
                 }
             }
         }>Siguiente</button>
-    </>
+        </div>
+    </div>
 }
 
 export default Competencias

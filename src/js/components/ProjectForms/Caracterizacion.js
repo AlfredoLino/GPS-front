@@ -28,7 +28,7 @@ const Caracterizacion = ()=>{
     
     const optionsTip = ["Formativo", "Resolutivo"]
 
-    return <>
+    return <div className = 'activity' style={{marginTop: '1rem'}}>
         <h1>Caracterizacion del proyecto</h1>
         {invalidData && <div className="alert alert-danger" role="alert">
                Todos los campos deben ser llenados de forma satisfactoria.
@@ -54,7 +54,7 @@ const Caracterizacion = ()=>{
         <div style={{padding: "10px 0"}} className="row">
             <div className="col-md-6">
                 <div className="input-group">
-                    <span className="input-group-text">Alcances</span>
+                    <span className="input-group-text">Alcances <br/>del proyecto</span>
                     <textarea onChange = {alcancesHandler} value = {contextForm.state.alcances} name="form-control" cols="50" rows="5"></textarea>
                 </div>
             </div>
@@ -65,6 +65,11 @@ const Caracterizacion = ()=>{
                 </div>
             </div>
         </div>
+
+        <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+        }}>
         <button 
             onClick={()=>{contextForm.dispatch({action: actions.PREV_PAGE})}}
             className="btn btn-primary" >Regresar</button>
@@ -98,7 +103,9 @@ const Caracterizacion = ()=>{
 
             }}
             className="btn btn-primary" >Siguiente</button>
-    </>
+
+        </div>
+    </div>
 }
 
 export default Caracterizacion;

@@ -36,7 +36,7 @@ const Actividad = ({nactividad}) =>{
     }
     
     
-    return <>
+    return <div className='activity'>
         <h3>Actividad {nactividad+1}</h3>
         <div className="input-group mb-3">
           <input onChange={handlerNombreActividad} className="form-control" placeholder="Nombre de actividadd"></input>
@@ -65,11 +65,7 @@ const Actividad = ({nactividad}) =>{
                   
         )
         }
-        
-        
-
-
-    </>
+    </div>
 }
 
 export default Actividad

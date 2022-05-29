@@ -90,7 +90,7 @@ const Cronograma = () =>{
         </h2>
         <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
           <div className="accordion-body">
-            <div style={{paddingTop: "10px"}} className="container">
+            <div className="container cronograma">
               {state.cronograma.length > 0 && state.cronograma.map(info => <Actividad nactividad= {info.nactividad} />) }
             </div>
             <button style={{margin: "10px 0"}} className = "btn btn-primary" onClick={addActivity} >Agregar Actividad</button>

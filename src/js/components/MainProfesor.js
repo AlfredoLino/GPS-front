@@ -45,16 +45,16 @@ const MainProfesor = (props)=>{
     return <>
         <Layout>
             <div className="container">
-            <div className="row" >
-                <div className="col-md-12" style={{overflow:"scroll", maxHeight:"100%"}}>
-                    <FormContext.Provider value={{state, dispatch}}>
-                        {state.page == 1 && <InfoGeneral />}
-                        {state.page == 2 && <Caracterizacion />}
-                        {state.page == 3 && <Competencias />}
-                        {state.page == 4 && <Cronograma />}
-                    </FormContext.Provider>
+                <div className="row" >
+                    <div className="col-md-12" style={{overflow:"scroll", maxHeight:"100%"}}>
+                        <FormContext.Provider value={{state, dispatch}}>
+                            {state.page == 1 && <InfoGeneral />}
+                            {state.page == 2 && <Caracterizacion />}
+                            {state.page == 3 && <Competencias />}
+                            {state.page == 4 && <Cronograma />}
+                        </FormContext.Provider>
+                    </div>
                 </div>
-            </div>
             </div>
         </Layout>
         
