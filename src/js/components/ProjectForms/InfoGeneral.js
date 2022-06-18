@@ -1,6 +1,7 @@
 import React, {useState ,useEffect, useContext} from 'react';
 import Alumno from "./Alumnos"
 import {FormContext} from "../MainProfesor"
+import Comentarios from '../Comentarios';
 import {Context} from "../App"
 import {actions} from "./actions"
 import validator from "../../validations/datos_generales"
@@ -315,6 +316,7 @@ const InfoGeneral = ()=>{
             }
         }} className = "btn btn-primary">Siguiente</button>       
     
+        <Comentarios />
     </>
     
 }
