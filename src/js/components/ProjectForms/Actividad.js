@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import {actions} from "./actions"
 import {FormContext} from "../MainProfesor"
-const Actividad = ({nactividad}) =>{
+const Actividad = ({nactividad, index}) =>{
 
     const {state, dispatch} = useContext(FormContext)
     const [selectedAlumn, setSelectedAlumn] = useState("-1");
@@ -37,7 +37,7 @@ const Actividad = ({nactividad}) =>{
     
     
     return <div className='activity'>
-        <h3>Actividad {nactividad+1}</h3>
+        <h3>Actividad {index+1}</h3>
         <div className="input-group mb-3">
           <input onChange={handlerNombreActividad} className="form-control" placeholder="Nombre de actividadd"></input>
         </div>
@@ -55,16 +55,25 @@ const Actividad = ({nactividad}) =>{
         <h2>Responsables: </h2>
         {state.cronograma.length > 0 &&
         state.cronograma.map( activity => 
-          (activity.nactividad == nactividad) &&
+          (activity.nactividad == nactividad) ?
             activity.responsables.map(name => 
               <div className="input-group mb-3">
                 <input value={name} type="text" disabled className="form-control" />
                 <button onClick={() =>{ dispatch({ action: actions.REMOVE_ALUMN_ACTIVITY, nactividad, value: name }) }} className="btn btn-danger" type="button">Quitar</button>
               </div> 
-            )
-                  
+            ) : 'Aun no hay responsables asignados'
         )
         }
+        <button className='btn section__cronograma-delete-button'
+        onClick={eve => {
+          dispatch({action : actions.REMOVE_ACTIVITY_FROM_CRONO, value: nactividad})
+        }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+
     </div>
 }
 

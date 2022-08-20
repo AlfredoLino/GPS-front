@@ -42,7 +42,6 @@ const ListaActividadesAlumno = () => {
                 }
             )
             const res = await req.json()
-            console.log(res)
             if(res.ok){
                 handlerRequest()
             }else{
@@ -77,7 +76,6 @@ const ListaActividadesAlumno = () => {
                             <input onChange={(e) => { 
                                 const [file] = e.target.files
                                 setArchivo(prev => [...prev, {f: file.path, a: act.nombreActividad }])
-                                console.log(file.path, archivo)
                             }} type="file" accept=".xlsx,.xls,.doc, .docx,.pdf" />
                         </>
                         }

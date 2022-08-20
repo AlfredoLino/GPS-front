@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import {shell} from "electron"
+import Comentarios from './Comentarios';
 
 const ProjectDisplay = (props) => {
     const {asignaturas, tituloProInt, institucion, departamentos, coordinador, colab
     , areaConoc, tipoEjec, tipoProyecto, materiaEje
-    ,limityRest, cronograma} = props
+    ,limityRest, cronograma, id, _id} = props
 
-    
+    console.log('ProjectDisp', id)
     return (
-        <div style={{width:"90%", margin:"20px auto", padding: '2%'}}>
+        <div style={{width:"90%", margin:"20px auto", padding: '2%', backgroundColor: 'white', borderRadius:'5px'}}>
             
             
             <section className='project__header'>
@@ -22,10 +23,14 @@ const ProjectDisplay = (props) => {
                     <p><span><b>Coordinador: </b>{coordinador}</span></p>
                     <p><span><b>Colaborador(es): </b>{colab}</span></p>
                 </div>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-                    </svg>
+                <div style={{width: 'fit-content'}}>
+                    <img style={{
+                        
+                            maxWidth: '50%',
+                            marginLeft: '13.2rem',
+                            marginTop: '0'
+                        
+                    }} src='http://www.cdmadero.tecnm.mx/images/logo-itcm-v2.png' />
                 </div>
                 <div className ='slash'></div>
             </section>
@@ -214,6 +219,8 @@ const ProjectDisplay = (props) => {
                 </svg>
                     Descargar informe
             </button>
+                
+            <Comentarios projectId = {id || _id}/>
         </div>
     );
 }

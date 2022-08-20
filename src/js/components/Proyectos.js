@@ -5,9 +5,11 @@ import {Context} from "./App"
 import ProjectDisplay from "./ProjectDisplay"
 import "../../styles/Proyectos.scss"
 const Proyectos = () => {
-    const {usuario} = useContext(Context)
-    const [projectToView, setProjectToView] = useState(null)
-    const [projects, setProjects] = useState(null)
+
+    const { usuario } = useContext(Context)
+    const [ projectToView, setProjectToView ] = useState(null)
+    const [ projects, setProjects ] = useState(null)
+
     const getProjects = async ()=>{
         try {
             const req = await fetch('http://localhost:3001/getProyectos', {
@@ -17,7 +19,8 @@ const Proyectos = () => {
                 },
                 body: JSON.stringify(
                     {
-                        nombre: usuario.nombre
+                        nombre: usuario.id,
+                        all: true,
                     }
                 )
             })
@@ -28,13 +31,17 @@ const Proyectos = () => {
             console.log(error)
         }
     }
-    const handlerView = ( name )=>{
-        const _proj = projects.find( pros => pros.tituloProInt == name )
-        setProjectToView(_proj)
-    }
+
     useEffect(() => {
         getProjects()
     }, []);
+
+    const handlerView = ( id )=>{
+        const _proj = projects.find( pros => pros._id == id )
+        setProjectToView(_proj)
+    }
+
+
     return (
         <Layout>
             {
@@ -50,7 +57,7 @@ const Proyectos = () => {
                                 boxShadow: '1px 7px 26px -7px rgba(0,0,0,0.75)'
                             }}
                             className="pro__list">   
-                                {projects.map(proj => <TarjetaProyecto setProject={handlerView} title={proj.tituloProInt} />)}
+                                {projects.map(proj => <TarjetaProyecto setProject={handlerView} title={proj.tituloProInt} id = {proj._id} />)}
                             </div>
                             <div 
                             style={{
@@ -66,7 +73,7 @@ const Proyectos = () => {
                                 <ProjectDisplay 
                                     tituloProInt = {projectToView.tituloProInt}
                                     institucion = {projectToView.institucion}
-                                    coordinador = {projectToView.profResp}
+                                    coordinador = {projectToView.profRespName}
                                     departamentos = {projectToView.departamentos} 
                                     colab = {projectToView.colab}
                                     areaConoc = {projectToView.areaConoc}
@@ -76,6 +83,7 @@ const Proyectos = () => {
                                     limityRest = {projectToView.limityRest}
                                     asignaturas = {projectToView.asignaturas}
                                     cronograma = {projectToView.cronograma}
+                                    id = {projectToView._id}
                                 />: <h3 className='select__project'> Seleccione un proyecto </h3>}
                             </div>
                         </div>

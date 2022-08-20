@@ -41,7 +41,6 @@ const MainProfesor = (props)=>{
     
     const [state, dispatch] = useReducer(reducer, initialFormState);
     const con = useContext(Context)
-    console.log(con)
     return <>
         <Layout>
             <div className="container">

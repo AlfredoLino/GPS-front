@@ -10,6 +10,7 @@ const DetallesAlumno = () => {
         const req = await fetch(`http://localhost:3001/getSinglePro/${titulo}`)
         const doc = await req.json()
         if(doc){
+            console.log('Detalles Alumno', doc);
             setActividad(doc)
         }
         else{

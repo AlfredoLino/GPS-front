@@ -5,9 +5,6 @@ import {Context} from "./App"
 
 export default ()=>{
     const tokenContext = useContext(Context)
-    useEffect(() => {
-        console.log(tokenContext.token)
-    }, []);
 
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -33,7 +30,6 @@ export default ()=>{
             if(data.error){
                 setError(data.error);
             }else{
-                console.log(data.user)
                 tokenContext.setUsuario(data.user)
                 tokenContext.setToken(data.token)
             }
@@ -43,7 +39,7 @@ export default ()=>{
     }
     return <>
     
-        {tokenContext.token && <Redirect to = {`/${type}/main/`} />}
+        {tokenContext.token && <Redirect to = {`/${'alumno'}/main/`} />}
         <div className="container">
             <div className = "row">
                 <div

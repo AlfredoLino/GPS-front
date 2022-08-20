@@ -55,8 +55,6 @@ const Competencias = ()=>{
                 const {asignaturas} = state
                 const result = validator.validate({ asignaturas })
                 if(result.error){
-                    
-                    console.log('No pasarás ', result)
                 }else{ 
                     dispatch({ action: actions.NEXT_PAGE }) 
                 }

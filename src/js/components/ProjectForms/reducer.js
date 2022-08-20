@@ -100,15 +100,15 @@ const reducer = (state, payload)=>{
             return {...state, asignaturas:newCompThree}
             
         case actions.ADD_ALUMNO:
-            console.log(state.alumnos)
             const isInAlumno = state.alumnos.find(alu => alu.ncontrol == payload.value.ncontrol)
             return isInAlumno ? {...state} :{...state, alumnos:[...state.alumnos, payload.value]}
 
         case actions.REMOVE_ALUMNO:
-            console.log(payload.value)
+            
             const filteredAlumns = state.alumnos.filter(alu => alu.ncontrol != payload.value)
             return {...state, alumnos: filteredAlumns}
         case actions.ADD_ACTIVITY:
+            console.log('ADDING ACTIVITY', {...state, cronograma: [...state.cronograma, { nactividad: payload.value, responsables:[] }]});
             return {...state, cronograma: [...state.cronograma, { nactividad: payload.value, responsables:[] }]}
 
         case actions.SET_NAME_ACTIVITY:
@@ -130,9 +130,10 @@ const reducer = (state, payload)=>{
                     return act
                 }
             })
-            console.log(state)
             return { ...state, cronograma: dateModified }
+            
         case actions.ADD_ALUMN_ACTIVITY:
+            console.log('ACTIVITY ADDED', payload)
             const alumnModified = state.cronograma.map(act =>{
                 if(act.nactividad === payload.nactividad){
                     act.responsables =  act.responsables.find(alu => alu == payload.value) ? [...act.responsables] :[...act.responsables, payload.value]
@@ -153,15 +154,22 @@ const reducer = (state, payload)=>{
                 }
             })
             return { ...state, cronograma: alumnRemoved }
+        case actions.REMOVE_ACTIVITY_FROM_CRONO:
+            const filteredCronograma = state.cronograma.filter(activity => activity.nactividad !== payload.value)
+            console.log(filteredCronograma);
+            return {...state, cronograma : filteredCronograma}
+
         case actions.SET_IMPACTO_PROYECTO:
             return {...state, impactoProyecto: payload.value}
+
         case actions.SET_PRODUCTIVIDAD_ACADEMICA:
             const isInProduct = state.productoEntrega.find( prod => prod == payload.value )
-            console.log(isInProduct)
             return  isInProduct ? {...state} :{...state, productoEntrega: [...state.productoEntrega, payload.value]}
+
         case actions.REMOVE_PRODUCTIVIDAD_ACADEMICA:
             const newProduct = state.productoEntrega.filter(prod => prod != payload.value )
             return {...state, productoEntrega: newProduct}
+
         default:
             return state;
     }
