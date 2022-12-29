@@ -1,15 +1,13 @@
 import React from 'react';
+import { Text, Box, Button } from '@chakra-ui/react';
 
 const TarjetaProyecto = (props) => {
     const {title, setProject, id} = props
     return (
-        
-        <div style={{borderRadius:"0"}} className="card">
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <button onClick={()=>{setProject(id)}} className="btn btn-primary"> Ver detalles </button>
-            </div>
-        </div>
+        <Box p={'2'} mt='2' bg='gray.300' borderRadius={'md'} >
+                <Text isTruncated fontWeight={'medium'}>{title}</Text>
+                <Button size={'sm'} mt='2' onClick={()=>{setProject(id)}} bg='madero.base'> Ver detalles </Button>
+        </Box>
     );
 }
 

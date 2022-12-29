@@ -1,18 +1,37 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import RadioLog from './RadioGroupLogin'
 import {Context} from "./App"
 
+import { Button } from '@chakra-ui/react';
+import { NoSymbol } from './Icons';
+
+
+let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+
+const LoginButton = ({isValid, error}) => {
+    if(error){
+        return error
+    }
+    if(!isValid){
+        return 'Log In'
+    }
+    return <NoSymbol />
+}
 export default ()=>{
     const tokenContext = useContext(Context)
 
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [type, setType] = useState("profesor")
-    const [error, setError] = useState("")
+    const [error, setError] = useState(undefined)
+    const [loading, setLoading] = useState(false)
+    const isValidLogInFormat = !(email.match(mailformat) && pass.length >= 6);
 
     const onLogIn = async ()=>{
         try {
+            setLoading(true)
             const req = await fetch(`http://localhost:3001/login/${type}`, {
                 method: "POST",
                 headers:{
@@ -32,14 +51,25 @@ export default ()=>{
             }else{
                 tokenContext.setUsuario(data.user)
                 tokenContext.setToken(data.token)
+                
             }
         } catch (error) {
-            setError('Incapaz de conectar con el servidor')
+            setError('Malas Credenciales')
         }
+        setLoading(false)
     }
+
+    useEffect(() => {
+        const errorTimeout = setInterval(() => {
+            setError(undefined)
+        }, 2500);
+        return () => clearInterval(errorTimeout)
+    }, [error])
+    
+
     return <>
     
-        {tokenContext.token && <Redirect to = {`/${'alumno'}/main/`} />}
+        {tokenContext.token && <Redirect to = {`/${'profesor'}/main/`} />}
         <div className="container">
             <div className = "row">
                 <div
@@ -62,7 +92,12 @@ export default ()=>{
                         right: '70%'
                     }}
                     ></div>
-                    <h2 style={{marginBottom: '1rem'}}>Login</h2>
+                    <h2 style={
+                        {
+                            marginBottom: '1rem',
+                            fontSize: '2rem'
+                        }
+                    }>Login</h2>
                     <div className="form-group">
                     <input style={
                         {
@@ -76,7 +111,7 @@ export default ()=>{
                     aria-describedby="emailHelp"/>
                     <input style={
                         {
-                            borderTopLeftRadius:0,
+                        borderTopLeftRadius:0,
                             borderTopRightRadius:0
                         }
                     } 
@@ -87,10 +122,11 @@ export default ()=>{
                     aria-describedby="emailHelp"/>
                     </div>
                     <RadioLog handler = {setType} type = {type} />
-                    <button onClick={onLogIn} className="btn btn-primary btn-lg btn-block">Log in</button>
-                    
+                    <Button fontFamily={'body'} isLoading = {loading} isDisabled = {isValidLogInFormat || error} isFullWidth onClick={onLogIn} color='black' bgColor={(isValidLogInFormat || error) ? 'red.700':'madero.base'} size = 'lg'>
+                        <LoginButton isValid = {isValidLogInFormat} error = {error}/>
+                    </Button>
                     <div className="card infoLog">
-                        <div  >
+                        <div>
                             <p className="card-text">Instituto Tecnológico de Ciudad Madero</p>
                             <p className="card-text">
                             Av. 1o. de Mayo esq. Sor Juana Inés de la Cruz s/n Col. Los Mangos C.P.89440
@@ -98,7 +134,6 @@ export default ()=>{
                             <p className="card-text">Conmutador: <b>01 (833) 357-48-20</b></p>
                         </div>
                     </div>
-                    
                 </div>
                 <div className="col-sm-8">
                     <img 

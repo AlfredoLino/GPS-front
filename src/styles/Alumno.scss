@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@500&display=swap');
+
+
+.testFont{
+    font-family: 'Chivo Mono', monospace !important;
+}
 .display__home{
-    height: 560px;
+    height: 100%;
     width: 85%;
-    margin: 15px auto;
+    margin: auto;
     div{
-        background-color: white;
-        padding: 1rem;
         border-radius: 5px;
     }
     ul{
@@ -13,7 +17,6 @@
 }
 
 .project__element{
-    box-shadow: 0px 3px 3px 4px rgba(0,0,0,0.18);
     margin: 12px 0;
     display: flex;
     justify-content: space-between;
@@ -34,12 +37,12 @@
         margin-right: 2rem;
 
         cursor: pointer;
-        color: rgb(29, 45, 80);
-        border-color: rgb(29, 45, 80);
+        border-color: #1d2d50;
+        color: white;
     }
     .button-to_see_project:hover{
-        background-color: rgb(29, 45, 80);
-        color: white;
+        background-color: rgba(29, 45, 80, 0);
+        color: #CBD5E0;
 
     }
 }

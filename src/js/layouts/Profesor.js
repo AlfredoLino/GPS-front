@@ -1,29 +1,24 @@
+import { Button, Flex, Spacer, Text } from '@chakra-ui/react';
 import React,{useContext} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import {Context} from "../components/App"
+import { UserBadge } from './Alumno';
+import { LogOutIcon } from '../components/Icons';
+
 const LayoutProfesor = ({children}) =>{
     const {token, setToken, usuario } = useContext(Context)
+    const history = useHistory()
+    const toHome = () => history.push("/profesor/main")
+
     return <>
-        { !token && <Redirect to="/" /> }
-        <nav className="navbar navbar-light" style={{ backgroundColor: "#1d2d50" }}>
-            <div className="container-fluid">
-                <div style={{display: "flex"}}>
-                    <Link to="/profesor/main" className="navbar-brand" style={{color: "#ffffff"}}> <h4> TecNM </h4></Link>
-                    <div className="dropdown">
-                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Opciones
-                        </button>
-                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><Link className="dropdown-item" to="/profesor/proyectos">Proyectos</Link></li>
-                            <li><a className="dropdown-item" href="#">Informacion</a></li>
-                            <li><a className="dropdown-item" href="#">Estadisticas</a></li>
-                        </ul>
-                    </div>
-                    
-                <Link to = "/profesor/info" className="navbar-brand" style={{color: "white", paddingLeft:"10px"}}>Usuario: {usuario.nombre}</Link>
-                </div>
-                <button onClick = {() => { setToken(null) }} className="btn btn-primary" >Cerrar</button>
-            </div>
+        {!token && <Redirect to="/" />}
+        <nav>
+            <Flex pl='6' pr={'6'} pt='4' pb={'2'} bg={'tecnm.dark'}>
+                <Text fontSize={'1.5rem'} mr='9' color={'gray.300'} as={'button'} onClick={toHome}> Tecnm </Text>
+                <UserBadge {...usuario} />
+                <Spacer/>
+                <Button variant={'link'} rightIcon={<LogOutIcon style={{ width:'1.5rem' }}/>} color='gray.300' onClick={() => { setToken(null) }}>Cerrar</Button>
+            </Flex>
         </nav>
         {children}
     </>
